@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivenciando Matemática</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Vivenciando <i>Matemática</i></h1>
+  <p>Aponte a câmera para o mundo real e descubra a função escondida nele, com sua derivada e sua integral.</p>
+</header>
+<main>
+  <section class="card">
+    <h2>1. Capture uma imagem</h2>
+    <p class="mut">Procure um contorno marcante: o horizonte, uma rampa, uma ponte em arco, o jato de um bebedouro, a borda de uma mesa.</p>
+    <div id="perm">
+      <p>🔒 Para tirar a foto, o navegador vai pedir permissão para usar a câmera. A imagem fica só no seu computador e não é enviada a nenhum servidor.</p>
+      <button id="bCam">Permitir e abrir câmera</button>
+      <label class="btn alt">Enviar uma foto<input type="file" id="file" accept="image/*" hidden></label>
+    </div>
+    <div id="camBox" hidden>
+      <video id="vid" autoplay playsinline muted></video>
+      <div class="row"><button id="bShot">Capturar foto</button><button class="alt" id="bFecha">Cancelar</button></div>
+    </div>
+    <p id="msg" class="mut"></p>
+  </section>
+
+  <section class="card" id="sAn" hidden>
+    <h2>2. Veja a matemática</h2>
+    <p class="mut">A foto vira um plano cartesiano (x de 0,5 a 10 e y de 0,5 a 10, com o y crescendo para cima). O contorno da imagem é ajustado às cinco famílias de funções.</p>
+    <div class="grid">
+      <div>
+        <canvas id="foto" aria-label="Foto capturada com a curva ajustada"></canvas>
+        <div class="row">
+          <label>Contorno:
+            <select id="modo"><option value="auto">Automático (maior borda de cada coluna)</option><option value="manual">Marcar pontos com o clique</option></select>
+          </label>
+          <button class="alt" id="bLimpa">Limpar pontos</button>
+          <button class="alt" id="bNova">Nova foto</button>
+        </div>
+        <div id="aviso"></div>
+      </div>
+      <div>
+        <canvas id="graf" width="640" height="420" aria-label="Gráfico de f, f' e da integral"></canvas>
+        <div class="row">
+          <label class="f"><input type="checkbox" id="cf" checked> f(x)</label>
+          <label class="d"><input type="checkbox" id="cd" checked> f′(x) derivada</label>
+          <label class="i"><input type="checkbox" id="ci" checked> ∫f(x)dx integral</label>
+        </div>
+        <label style="display:flex">Ponto x: <input type="range" id="t" min="0.5" max="10" step="0.05" value="5" style="flex:1"></label>
+        <p id="leit" class="mut"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="sRes" hidden>
+    <h2 id="tit">Resultado</h2>
+    <label>Modelo:
+      <select id="modelo">
+        <option value="auto">Melhor ajuste (automático)</option>
+        <option value="const">Constante</option><option value="afim">Afim</option><option value="quad">Quadrática</option>
+        <option value="exp">Exponencial</option><option value="log">Logarítmica</option>
+      </select>
+    </label>
+    <p class="form f" id="tf"></p>
+    <p class="form d" id="td"></p>
+    <p class="form i" id="ti"></p>
+    <p class="mut">A integral é mostrada a partir de x = 0,5 (área acumulada). A constante C só desloca a curva para cima ou para baixo.</p>
+    <h2 style="margin-top:16px">No dia a dia</h2>
+    <p id="uso"></p>
+    <h2 style="margin-top:16px">Qualidade do ajuste (R²)</h2>
+    <div class="rank" id="rank"></div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
